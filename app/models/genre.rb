@@ -9,6 +9,15 @@ class Genre
   attr_accessor(*self.public_attributes)
   attr_reader :id
 
-  def movies
+  def movies(genre)
+    sql = <<-SQL
+    SELECT * FROM moviegenres
+    WHERE genre = ?
+    SQL
+    self.class.db.execute(sql, genre)
   end
+
+
 end
+
+puts movies
