@@ -1,3 +1,4 @@
+require "pry"
 class Genre
   include Databaseable::InstanceMethods
   extend Databaseable::ClassMethods
@@ -11,13 +12,14 @@ class Genre
 
   def movies(genre)
     sql = <<-SQL
-    SELECT * FROM moviegenres
+    SELECT * FROM movies
     WHERE genre = ?
     SQL
-    self.class.db.execute(sql, genre)
+    x = self.class.db.execute(sql, self.name)
+    binding.pry
   end
 
 
 end
 
-puts movies
+# puts movies
